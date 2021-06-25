@@ -1,0 +1,64 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema bms
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema bms
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bms` DEFAULT CHARACTER SET utf8 ;
+USE `bms` ;
+
+-- -----------------------------------------------------
+-- Table `bms`.`customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bms`.`customer` (
+  `customer_id` INT NOT NULL AUTO_INCREMENT,
+  `customer_email_address` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_first_name` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_last_name` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_password` VARCHAR(60) NULL DEFAULT NULL,
+`customer_address` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_street` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_country` VARCHAR(60) NULL DEFAULT NULL,
+ `customer_pan` VARCHAR(45) NULL DEFAULT NULL,
+  `customer_contact_no` VARCHAR(60) NULL DEFAULT NULL,
+`customer_dob` DATE NULL DEFAULT NULL,
+  `customer_account_type` VARCHAR(60) NULL DEFAULT NULL,
+  PRIMARY KEY (`customer_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `bms`.`loan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bms`.`loan` (
+  `loan_id` INT NOT NULL AUTO_INCREMENT,
+  `loan_type` VARCHAR(45) NULL DEFAULT NULL,
+  `loan_amount` double,
+  `loan_date` DATE NULL DEFAULT NULL,
+  `loan_roi` double,
+`loan_duration` double NULL DEFAULT NULL,
+`customer_id` int,
+  PRIMARY KEY (`loan_id`),
+  CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES bms.customer(customer_id)
+  ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
